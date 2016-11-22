@@ -146,11 +146,8 @@ public class MainActivity extends AppCompatActivity {
                     conn.connect();
 
                     bmp = BitmapFactory.decodeStream(conn.getInputStream());
-
-
                     uiHandler.sendEmptyMessage(2);
-
-                    //imageView.setImageBitmap(bmp);
+                    
 
                 } catch (Exception e) {
                     Log.v("shine", e.toString());
