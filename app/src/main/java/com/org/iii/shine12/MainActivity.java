@@ -16,18 +16,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
     // UDP Sender
-    public void test1(View v){
-        byte[] buf = "Hello, Brad".getBytes();
-        try {
-            DatagramSocket socket = new DatagramSocket();
-            DatagramPacket packet = new DatagramPacket(buf, buf.length,
-                    InetAddress.getByName("10.0.3.2"), 8888);
-            socket.send(packet);
-            socket.close();
-            Log.v("brad", "UDP Send OK");
-        }catch (Exception e){
-            Log.v("brad", e.toString());
-        }
+    public void test1(View v) {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                byte[] buf = "Hello, Shine".getBytes();
+                try {
+                    DatagramSocket socket = new DatagramSocket();
+                    DatagramPacket packet = new DatagramPacket(buf, buf.length,
+                            InetAddress.getByName("10.0.3.2"), 8888);
+                    socket.send(packet);
+                    socket.close();
+                    Log.v("shine", "UDP Send OK");
+                } catch (Exception e) {
+                    Log.v("shine", e.toString());
+                }
+            }
+        }.start();
     }
+
 }
