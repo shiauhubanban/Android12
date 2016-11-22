@@ -8,6 +8,8 @@ import android.view.View;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,5 +40,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
+    public void test2(View v){
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Socket socket = new Socket(InetAddress.getByName("10.0.3.2"), 9999);
+                    socket.close();
+                    Log.v("Shine", "TCP Client OK");
+                }catch (Exception e){
+                    Log.v("Shine", e.toString());
+                }
+            }
+        }.start();
+    }
 
+    public void test3(View v){
+
+    }
 }
