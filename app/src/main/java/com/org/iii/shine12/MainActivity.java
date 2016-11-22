@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Socket socket = new Socket(InetAddress.getByName("10.0.3.2"), 9999);
                     socket.close();
-                    Log.v("Shine", "TCP Client OK");
+                    Log.v("shine", "TCP Client OK");
                 }catch (Exception e){
-                    Log.v("Shine", e.toString());
+                    Log.v("shine", e.toString());
                 }
             }
         }.start();
@@ -89,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                     Bundle data = new Bundle();
                     data.putCharSequence("data", sb);
                     mesg.setData(data);
+                    mesg.what=0;
                     uiHandler.sendMessage(mesg);
 
 
                 } catch (Exception e) {
-                    Log.v("brad", e.toString());
+                    Log.v("shine", e.toString());
                 }
 
             }
@@ -103,7 +104,11 @@ public class MainActivity extends AppCompatActivity {
     private class UIHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-
+        switch (msg.what){
+            case 0:
+                textView.setText(msg.getData().getCharSequence("data"));
+                break;
+            }
         }
     }
 
