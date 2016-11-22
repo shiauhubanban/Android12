@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
                     bmp = BitmapFactory.decodeStream(conn.getInputStream());
                     uiHandler.sendEmptyMessage(2);
-                    
+
 
                 } catch (Exception e) {
                     Log.v("shine", e.toString());
@@ -156,6 +157,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
+    public void test6(View v){
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    MultipartUtility mu = new MultipartUtility("http://10.0.3.2/add2.php", "UTF-8");
+                    mu.addFormField("account", "mark");
+                    mu.addFormField("passwd", "654321");
+                    List<String> ret =  mu.finish();
+                    Log.v("shine", ret.get(0));
+                }catch (Exception e){
+                    Log.v("shine", e.toString());
+                }
+            }
+        }.start();
+    }
+
 
     private class UIHandler extends Handler {
         @Override
